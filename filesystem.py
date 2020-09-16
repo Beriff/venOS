@@ -114,11 +114,3 @@ def surface_folder_delete(fid):
             subfolders_fids.append(x.fid)
         ROOT[fid].pop(ROOT[fid].index(x))
 
-create_folder("mm folde", 0)
-create_folder("le folde", 0)
-create_file("nigger", "nigga", "nigger content", 1)
-tuplel = surface_folder_peek(1)
-for i in range(0, len(tuplel[0])):
-    print(tuplel[1][tuplel[0][i]])
-print(ROOT)
-input()
