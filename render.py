@@ -33,10 +33,15 @@ INIT_STATE = []
 
 _TEST_STATE = []
 
-DEF_WHITE = renderObject("▓", COLORS["WHITE"])
-DEF_BLUE = renderObject("▓", COLORS["BLUE"])
+RO_DEFAULT_WHITE = renderObject("▓", COLORS["WHITE"])
+RO_DEFAULT_BLUE = renderObject("▓", COLORS["BLUE"])
+RO_DEFAULT_GREEN = renderObject("▓", COLORS["GREEN"])
+RO_DEFAULT_RED = renderObject("▓", COLORS["RED"])
+RO_DEFAULT_CYAN = renderObject("▓", COLORS["CYAN"])
+RO_DEFAULT_YELLOW = renderObject("▓", COLORS["YELLOW"])
+RO_DEFAULT_MAGENTA = renderObject("▓", COLORS["MAGENTA"])
 
-def _DEF_FILL(state, def_col=DEF_WHITE):
+def _DEF_FILL(state, def_col=RO_DEFAULT_WHITE):
     for i in range(0, HEIGHT):
         state.append([])
         for k in range(0, WIDTH):
@@ -55,7 +60,7 @@ NEW_RENDER = format_list([])
 
 
 _DEF_FILL(INIT_STATE)
-_DEF_FILL(_TEST_STATE, DEF_BLUE)
+_DEF_FILL(_TEST_STATE, RO_DEFAULT_BLUE)
 
 
 
@@ -89,3 +94,21 @@ def new_state_render(state):
     BUFFER_2 = BUFFER_1
     BUFFER_1 = []
     NEW_RENDER = format_list([])
+
+def draw_rectangle(state, y_1, x_1, y_2, x_2, outline_color=COLORS["WHITE"], fill=False, fill_color=COLORS["BLUE"], outline_symb="▓", fill_symb="▓"):
+    """returns a state with a drawn rectangle"""
+
+    for i in range(x_1, x_2 + 1):
+        state[y_1][i] = renderObject(outline_symb, outline_color)
+        state[y_2][i] = renderObject(outline_symb, outline_color)
+
+    for i in range(y_1, y_2):
+        state[i][x_1] = renderObject(outline_symb, outline_color)
+        state[i][x_2] = renderObject(outline_symb, outline_color)
+
+    return state
+
+#_TEST_STATE = draw_rectangle(_TEST_STATE, 5, 10, 15, 130)
+#new_state_render(_TEST_STATE)
+#input()
+
