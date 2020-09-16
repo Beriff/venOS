@@ -95,8 +95,11 @@ def new_state_render(state):
     BUFFER_1 = []
     NEW_RENDER = format_list([])
 
-def draw_rectangle(state, y_1, x_1, y_2, x_2, outline_color=COLORS["WHITE"], fill=False, fill_color=COLORS["BLUE"], outline_symb="▓", fill_symb="▓"):
+def draw_rectangle(state, y_1, x_1, y_2, x_2, outline_color=COLORS["WHITE"], fill=False, fill_color=COLORS["YELLOW"], outline_symb="▓", fill_symb="▓"):
     """returns a state with a drawn rectangle"""
+
+    y_2 -= 1
+    x_2 -= 1
 
     for i in range(x_1, x_2 + 1):
         state[y_1][i] = renderObject(outline_symb, outline_color)
@@ -106,9 +109,13 @@ def draw_rectangle(state, y_1, x_1, y_2, x_2, outline_color=COLORS["WHITE"], fil
         state[i][x_1] = renderObject(outline_symb, outline_color)
         state[i][x_2] = renderObject(outline_symb, outline_color)
 
+    if fill:
+        for i in range(y_1 + 1, y_2):
+            for k in range(x_1 + 1, x_2):
+                state[i][k] = renderObject(fill_symb, fill_color)
+
     return state
 
-#_TEST_STATE = draw_rectangle(_TEST_STATE, 5, 10, 15, 130)
+#_TEST_STATE = draw_rectangle(_TEST_STATE, 6, 10, 15, 15, COLORS["WHITE"], True)
 #new_state_render(_TEST_STATE)
 #input()
-
