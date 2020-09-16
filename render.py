@@ -1,5 +1,4 @@
 import os
-import enum
 
 os.system("mode con: cols=200 lines=50")
 
@@ -30,7 +29,6 @@ class renderObject:
 BUFFER_1 = []
 BUFFER_2 = []
 INIT_STATE = []
-NEW_RENDER = []
 
 _TEST_STATE = []
 
@@ -38,8 +36,22 @@ DEF_WHITE = renderObject("▓", COLORS["WHITE"])
 DEF_BLUE = renderObject("▓", COLORS["BLUE"])
 
 def _DEF_FILL(state, def_col=DEF_WHITE):
-    for i in range(0, WIDTH * HEIGHT):
-        state.append(def_col)
+    for i in range(0, HEIGHT):
+        state.append([])
+        for k in range(0, WIDTH):
+            state[i].append(def_col)
+
+def format_list(list_):
+    """formats list to 2d list used as state pattern"""
+    """can format existing lists or define new 2d list using var = format_list([])"""
+    for i in range(0, HEIGHT):
+        list_.append([])
+
+    return list_
+
+NEW_RENDER = format_list([])
+
+
 
 _DEF_FILL(INIT_STATE)
 _DEF_FILL(_TEST_STATE, DEF_BLUE)
@@ -57,22 +69,19 @@ def new_state_render(state):
     if not BUFFER_2:
         BUFFER_2 = INIT_STATE
     
-    for i in range(0, len(BUFFER_1)):
-        if BUFFER_1[i] != BUFFER_2[i]:
-            NEW_RENDER.append(BUFFER_1[i])
-        else:
-            NEW_RENDER.append(False)
+    for x in range(0, len(BUFFER_1)):
+        for y in range(0, len(BUFFER_1[0])):
+            if BUFFER_1[x][y] != BUFFER_2[x][y]:
+                NEW_RENDER[x].append(BUFFER_1[x][y])
+            else:
+                NEW_RENDER[x].append(False)
 
-    for i in range(0, len(NEW_RENDER)):
-        if NEW_RENDER[i]:
-            print(NEW_RENDER[i].symb, end="")
-        else:
-            print(BUFFER_2[i].symb, end="")
+    for x in range(0, len(NEW_RENDER)):
+        for y in range(0, len(NEW_RENDER[0])):
+            if NEW_RENDER[x][y]:
+                print(NEW_RENDER[x][y].symb, end="")
+            else:
+                print(BUFFER_2[x][y].symb, end="")
 
     BUFFER_2 = BUFFER_1
     BUFFER_1 = []
-
-
-
-
-
