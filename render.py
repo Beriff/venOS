@@ -1,3 +1,4 @@
+  
 import os
 
 os.system("mode con: cols=200 lines=50")
@@ -65,6 +66,8 @@ def new_state_render(state):
     global INIT_STATE
     global NEW_RENDER
 
+    os.system("cls")
+
     BUFFER_1 = state
     if not BUFFER_2:
         BUFFER_2 = INIT_STATE
@@ -85,3 +88,4 @@ def new_state_render(state):
 
     BUFFER_2 = BUFFER_1
     BUFFER_1 = []
+    NEW_RENDER = format_list([])
