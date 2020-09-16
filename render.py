@@ -67,7 +67,7 @@ def new_state_render(state):
         if NEW_RENDER[i]:
             print(NEW_RENDER[i].symb, end="")
         else:
-            print(BUFFER_2[i], end="")
+            print(BUFFER_2[i].symb, end="")
 
     BUFFER_2 = BUFFER_1
     BUFFER_1 = []
