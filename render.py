@@ -116,6 +116,15 @@ def draw_rectangle(state, y_1, x_1, y_2, x_2, outline_color=COLORS["WHITE"], fil
 
     return state
 
+def draw_point(state, x, y, col=COLORS["WHITE"], symb="▓"):
+    """returns a state with a placed point"""
+
+    state[y][x] = renderObject(symb, col)
+
+    return state
+
+
 #_TEST_STATE = draw_rectangle(_TEST_STATE, 6, 10, 15, 15, COLORS["WHITE"], True)
+#_TEST_STATE = draw_point(_TEST_STATE, 30, 30)
 #new_state_render(_TEST_STATE)
 #input()
