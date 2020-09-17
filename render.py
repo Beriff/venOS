@@ -1,4 +1,3 @@
-  
 import os
 
 os.system("mode con: cols=200 lines=50")
@@ -14,10 +13,16 @@ COLORS = {
     "WHITE": "\u001b[37m",
     "YELLOW": "\u001b[33m",
     "GREEN": "\u001b[32m",
-    "MAGENTA": "\u001b[35m"
-
+    "MAGENTA": "\u001b[35m",
+    "BRIGHT_YELLOW": "\u001b[33;1m",
+    "BRIGHT_GREEN": "\u001b[32;1m",
+    "BRIGHT_BLUE": "\u001b[34;1m",
+    "BRIGHT_MAGENTA": "\u001b[35;1m",
+    "BRIGHT_CYAN": "\u001b[36;1m",
+    "BRIGHT_RED": "\u001b[31;1m",
+    "BRIGHT_WHITE": "\u001b[37;1m" #the snow is snowier than before
     }
-
+    
 BG_COLORS = {
     "Background Black": "\u001b[40m",
     "RED": "\u001b[41m",
@@ -28,7 +33,6 @@ BG_COLORS = {
     "Background Cyan": "\u001b[46m",
     "WHITE": "\u001b[47m"
 }
-
 
 
 class renderObject:
@@ -109,6 +113,15 @@ def new_state_render(state):
     BUFFER_1 = []
     NEW_RENDER = format_list([])
 
+def layer_states_render(*states):
+    """render new state composed of different states"""
+    """to add a "transparent" pixel to state, add False"""
+    
+    os.system("cls")
+
+    for state in states:
+        new_state_render(state)
+
 def draw_rectangle(state, y_1, x_1, y_2, x_2, outline_color=COLORS["WHITE"], fill=False, fill_color=COLORS["YELLOW"], outline_symb="▓", fill_symb="▓"):
     """returns a state with a drawn rectangle"""
 
@@ -136,7 +149,7 @@ def draw_point(state, x, y, col=COLORS["WHITE"], symb="▓"):
     state[y][x] = renderObject(symb, col)
 
     return state
-  
+
 def draw_line(state, x1, y1, x2, y2, col=COLORS["WHITE"]):
     """uses bresenham algorithm to draw line"""
 
@@ -157,8 +170,8 @@ def draw_line(state, x1, y1, x2, y2, col=COLORS["WHITE"]):
 
     return state
 
+def draw_text(state, text, x, y, col=COLORS["WHITE"]):
+    for i in range(0, len(text)):
+        state[y][x + i] = renderObject(text[i], col) 
 
-#_TEST_STATE = draw_rectangle(_TEST_STATE, 6, 10, 15, 15, COLORS["WHITE"], True)
-#_TEST_STATE = draw_point(_TEST_STATE, 30, 30)
-#new_state_render(_TEST_STATE)
-#input()
+    return state
