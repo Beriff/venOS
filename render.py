@@ -18,6 +18,17 @@ COLORS = {
 
     }
 
+BG_COLORS = {
+    "Background Black": "\u001b[40m",
+    "RED": "\u001b[41m",
+    "Background Green": "\u001b[42m",
+    "YELLOW": "\u001b[43m",
+    "BLUE": "\u001b[44m",
+    "Background Magenta": "\u001b[45m",
+    "Background Cyan": "\u001b[46m",
+    "WHITE": "\u001b[47m"
+}
+
 
 
 class renderObject:
@@ -54,6 +65,9 @@ def format_list(list_):
         list_.append([])
 
     return list_
+
+def add_bg(color, bg_col):
+    return bg_col + color
 
 NEW_RENDER = format_list([])
 
