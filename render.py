@@ -24,13 +24,13 @@ COLORS = {
     }
     
 BG_COLORS = {
-    "Background Black": "\u001b[40m",
+    "BLACK": "\u001b[40m",
     "RED": "\u001b[41m",
     "GREEN": "\u001b[42m",
     "YELLOW": "\u001b[43m",
     "BLUE": "\u001b[44m",
-    "Background Magenta": "\u001b[45m",
-    "Background Cyan": "\u001b[46m",
+    "MAGENTA": "\u001b[45m",
+    "CYAN": "\u001b[46m",
     "WHITE": "\u001b[47m"
 }
 
@@ -109,18 +109,12 @@ def new_state_render(state):
             else:
                 print(BUFFER_2[x][y].symb, end="")
 
+
+
     BUFFER_2 = BUFFER_1
     BUFFER_1 = []
     NEW_RENDER = format_list([])
-
-def layer_states_render(*states):
-    """render new state composed of different states"""
-    """to add a "transparent" pixel to state, add False"""
-    
-    os.system("cls")
-
-    for state in states:
-        new_state_render(state)
+       
 
 def draw_rectangle(state, y_1, x_1, y_2, x_2, outline_color=COLORS["WHITE"], fill=False, fill_color=COLORS["YELLOW"], outline_symb="▓", fill_symb="▓"):
     """returns a state with a drawn rectangle"""
@@ -186,9 +180,3 @@ def draw_progress_bar(state, x, y, fractions, width, empty_cell, fill_cell, prog
 
     return state
 
-#state1 = []
-#_DEF_FILL(state1, renderObject("▓", add_bg(COLORS["BLUE"], BG_COLORS["BLUE"])))
-#state1 = draw_text(state1, "loading venOS", 90, 25, add_bg(COLORS["WHITE"], BG_COLORS["BLUE"]))
-#state1 = draw_progress_bar(state1, 73, 30, 5, 50, renderObject("▓", add_bg(COLORS["WHITE"], BG_COLORS["WHITE"])), renderObject("▓",add_bg(COLORS["GREEN"], BG_COLORS["GREEN"])), 2)
-#new_state_render(state1)
-#input()
