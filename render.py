@@ -26,7 +26,7 @@ COLORS = {
 BG_COLORS = {
     "Background Black": "\u001b[40m",
     "RED": "\u001b[41m",
-    "Background Green": "\u001b[42m",
+    "GREEN": "\u001b[42m",
     "YELLOW": "\u001b[43m",
     "BLUE": "\u001b[44m",
     "Background Magenta": "\u001b[45m",
@@ -175,3 +175,20 @@ def draw_text(state, text, x, y, col=COLORS["WHITE"]):
         state[y][x + i] = renderObject(text[i], col) 
 
     return state
+
+def draw_progress_bar(state, x, y, fractions, width, empty_cell, fill_cell, progress):
+    for i in range(0, width):
+        state[y][x + i] = empty_cell
+
+    for i in range(0, progress):
+        for k in range(0, fractions):
+            state[y][x + k] = fill_cell
+
+    return state
+
+#state1 = []
+#_DEF_FILL(state1, renderObject("▓", add_bg(COLORS["BLUE"], BG_COLORS["BLUE"])))
+#state1 = draw_text(state1, "loading venOS", 90, 25, add_bg(COLORS["WHITE"], BG_COLORS["BLUE"]))
+#state1 = draw_progress_bar(state1, 73, 30, 5, 50, renderObject("▓", add_bg(COLORS["WHITE"], BG_COLORS["WHITE"])), renderObject("▓",add_bg(COLORS["GREEN"], BG_COLORS["GREEN"])), 2)
+#new_state_render(state1)
+#input()
