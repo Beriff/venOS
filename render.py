@@ -122,6 +122,26 @@ def draw_point(state, x, y, col=COLORS["WHITE"], symb="▓"):
     state[y][x] = renderObject(symb, col)
 
     return state
+  
+def draw_line(state, x1, y1, x2, y2, col=COLORS["WHITE"]):
+    """uses bresenham algorithm to draw line"""
+
+
+    m_new = 2 * (y2 - y1)  
+    slope_error_new = m_new - (x2 - x1) 
+  
+    y = y1 
+    for x in range(x1, x2 + 1):  
+      
+        draw_point(state, x, y, col)
+ 
+        slope_error_new =slope_error_new + m_new  
+  
+        if (slope_error_new >= 0):  
+            y= y + 1
+            slope_error_new = slope_error_new - 2 * (x2 - x1)  
+
+    return state
 
 
 #_TEST_STATE = draw_rectangle(_TEST_STATE, 6, 10, 15, 15, COLORS["WHITE"], True)
