@@ -1,7 +1,8 @@
+  
 import os
+import time
 
 os.system("mode con: cols=200 lines=50")
-
 WIDTH = 200
 HEIGHT = 50
 
@@ -56,11 +57,7 @@ RO_DEFAULT_CYAN = renderObject("▓", COLORS["CYAN"])
 RO_DEFAULT_YELLOW = renderObject("▓", COLORS["YELLOW"])
 RO_DEFAULT_MAGENTA = renderObject("▓", COLORS["MAGENTA"])
 
-def _DEF_FILL(state, def_col=RO_DEFAULT_WHITE):
-    for i in range(0, HEIGHT):
-        state.append([])
-        for k in range(0, WIDTH):
-            state[i].append(def_col)
+
 
 def format_list(list_):
     """formats list to 2d list used as state pattern"""
@@ -69,6 +66,14 @@ def format_list(list_):
         list_.append([])
 
     return list_
+    
+def _DEF_FILL(def_col=RO_DEFAULT_WHITE):
+    state = format_list([])
+    for i in range(0, len(state)):
+        for k in range(0, WIDTH):
+            state[i].append(def_col)
+
+    return state
 
 def add_bg(color, bg_col):
     return bg_col + color
@@ -77,43 +82,22 @@ NEW_RENDER = format_list([])
 
 
 
-_DEF_FILL(INIT_STATE)
-_DEF_FILL(_TEST_STATE, RO_DEFAULT_BLUE)
+INIT_STATE = _DEF_FILL(INIT_STATE)
+_TEST_STATE = _DEF_FILL(RO_DEFAULT_BLUE)
 
 
 
 def new_state_render(state):
     """render new state using double buffering"""
-    global BUFFER_1
-    global BUFFER_2
-    global INIT_STATE
-    global NEW_RENDER
 
     os.system("cls")
 
-    BUFFER_1 = state
-    if not BUFFER_2:
-        BUFFER_2 = INIT_STATE
-    
-    for x in range(0, len(BUFFER_1)):
-        for y in range(0, len(BUFFER_1[0])):
-            if BUFFER_1[x][y] != BUFFER_2[x][y]:
-                NEW_RENDER[x].append(BUFFER_1[x][y])
-            else:
-                NEW_RENDER[x].append(False)
+    for x in range(0, HEIGHT):
+        
+        for y in range(0, WIDTH - 1):
+            print(state[x][y].symb, end="")
 
-    for x in range(0, len(NEW_RENDER)):
-        for y in range(0, len(NEW_RENDER[0])):
-            if NEW_RENDER[x][y]:
-                print(NEW_RENDER[x][y].symb, end="")
-            else:
-                print(BUFFER_2[x][y].symb, end="")
-
-
-
-    BUFFER_2 = BUFFER_1
-    BUFFER_1 = []
-    NEW_RENDER = format_list([])
+        print("\n", end="")
        
 
 def draw_rectangle(state, y_1, x_1, y_2, x_2, outline_color=COLORS["WHITE"], fill=False, fill_color=COLORS["YELLOW"], outline_symb="▓", fill_symb="▓"):
@@ -176,7 +160,7 @@ def draw_progress_bar(state, x, y, fractions, width, empty_cell, fill_cell, prog
 
     for i in range(0, progress):
         for k in range(0, fractions):
-            state[y][x + k] = fill_cell
+            state[y][x + i + k] = fill_cell
 
     return state
 
