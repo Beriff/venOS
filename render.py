@@ -43,10 +43,6 @@ class renderObject:
 
         self.symb = self.col + self.symb + COLORS["RESET"]
 
-BUFFER_1 = []
-BUFFER_2 = []
-INIT_STATE = []
-
 _TEST_STATE = []
 
 RO_DEFAULT_WHITE = renderObject("▓", COLORS["WHITE"])
@@ -56,7 +52,6 @@ RO_DEFAULT_RED = renderObject("▓", COLORS["RED"])
 RO_DEFAULT_CYAN = renderObject("▓", COLORS["CYAN"])
 RO_DEFAULT_YELLOW = renderObject("▓", COLORS["YELLOW"])
 RO_DEFAULT_MAGENTA = renderObject("▓", COLORS["MAGENTA"])
-
 
 
 def format_list(list_):
@@ -80,9 +75,6 @@ def add_bg(color, bg_col):
 
 NEW_RENDER = format_list([])
 
-
-
-INIT_STATE = _DEF_FILL(INIT_STATE)
 _TEST_STATE = _DEF_FILL(RO_DEFAULT_BLUE)
 
 
@@ -163,4 +155,3 @@ def draw_progress_bar(state, x, y, fractions, width, empty_cell, fill_cell, prog
             state[y][x + i + k] = fill_cell
 
     return state
-
