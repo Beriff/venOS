@@ -31,7 +31,7 @@ master.newWidget("myButton", wa.Button("click me", test), 50, 50, 1) #creating b
 #As result, it will draw blank canvas, then a button over it. On button click, it will draw a yellow line.
 ```
 
-The point of the project is to develop a community of people who are helping with this projects by creating new apps / improving source code / creating new libraries and see how far
+The point of the project is to develop a community of people who are helping with this project by creating new apps / improving source code / creating new libraries and see how far
 we can push this and how similar the final project will look to any existing operating systems.
 
 To use the project, head up to the latest release and download the project. venOS is intended to be used in a "raw" form of just a bunch of python files. This way gives more flexible interacting
